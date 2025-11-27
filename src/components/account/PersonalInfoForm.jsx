@@ -68,7 +68,7 @@ export default function PersonalInfoForm() {
 
 
   return (
-    <Box sx={{ px: 2, py: 3 }}>
+    <Box sx={{ px: 2, py: 0 }}>
       <Grid container spacing={4}>
         <Grid size={6}>
           <Typography>Full Name</Typography>

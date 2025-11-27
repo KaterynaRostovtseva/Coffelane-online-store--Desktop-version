@@ -109,10 +109,10 @@ export default function AccountSettingsForm() {
   );
 
   return (
-    <Box sx={{ px: 2, py: 3 }}>
+    <Box sx={{ px: 2, py: 0 }}>
       <Grid container spacing={4}>
         <Grid size={6}>
-          <Typography sx={{ mt: 2 }}>Email</Typography>
+          <Typography>Email</Typography>
           <TextField
             fullWidth
             placeholder="Email"
@@ -128,7 +128,7 @@ export default function AccountSettingsForm() {
         </Grid>
 
         <Grid size={6}>
-          <Typography sx={{ mt: 2 }}>Current password</Typography>
+          <Typography>Current password</Typography>
           {renderPasswordField("currentPassword", "Current password")}
           <Typography sx={{ mt: 2 }}>New password</Typography>
           {renderPasswordField("newPassword", "New password")}
