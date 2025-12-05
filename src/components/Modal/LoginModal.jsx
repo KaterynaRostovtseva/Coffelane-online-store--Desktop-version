@@ -42,13 +42,13 @@ export default function LoginModal({ open, handleClose, openResetByLink = false,
     const [intermediateEmail, setIntermediateEmail] = useState("");
     const [forgotEmail, setForgotEmail] = useState("");
 
-   useEffect(() => {
-    console.log("openResetByLink", openResetByLink, "tokenFromLink", tokenFromLink);
-    if (openResetByLink && tokenFromLink) {
-        setResetToken(tokenFromLink);
-        setResetOpen(true);
-    }
-}, [openResetByLink, tokenFromLink]);
+    useEffect(() => {
+        console.log("openResetByLink", openResetByLink, "tokenFromLink", tokenFromLink);
+        if (openResetByLink && tokenFromLink) {
+            setResetToken(tokenFromLink);
+            setResetOpen(true);
+        }
+    }, [openResetByLink, tokenFromLink]);
 
 
     const openIntermediate = (email) => {
@@ -325,7 +325,10 @@ export default function LoginModal({ open, handleClose, openResetByLink = false,
                 handleClose={() => setForgotOpen(false)}
                 setResetOpen={setResetOpen}
                 setToken={setResetToken}
-                backToLogin={() => setTab(0)}
+                backToLogin={() => {
+                    setForgotOpen(false); 
+                    setTab(0);          
+                }}
 
             />
             <IntermediateModal
