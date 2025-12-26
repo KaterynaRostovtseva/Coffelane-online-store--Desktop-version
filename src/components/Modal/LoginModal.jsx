@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import RegistrationSuccessful from "../Modal/RegistrationSuccessful.jsx";
-import { Dialog, Box, Tabs, Tab, TextField, Button, Typography, Divider, CircularProgress, Alert, FormControlLabel, Checkbox, IconButton, InputAdornment } from "@mui/material";
+import { Dialog, Box, Tabs, Tab, TextField, Button, Typography, Divider, CircularProgress, Alert, FormControlLabel, Checkbox, IconButton, InputAdornment, useMediaQuery, useTheme } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import CloseIcon from "@mui/icons-material/Close";
 import { h3, h7 } from "../../styles/typographyStyles.jsx";
 import { btnStyles } from "../../styles/btnStyles.jsx";
 import { inputStyles, checkboxStyles } from "../../styles/inputStyles.jsx";
@@ -21,6 +22,8 @@ export default function LoginModal({ open, handleClose, openResetByLink = false,
     const dispatch = useDispatch();
     const { loading } = useSelector((state) => state.auth);
     const navigate = useNavigate();
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     const [tab, setTab] = useState(0);
     const [email, setEmail] = useState("");
@@ -297,7 +300,21 @@ export default function LoginModal({ open, handleClose, openResetByLink = false,
     return (
         <Dialog open={open} onClose={handleClose}
             PaperProps={{ sx: { position: "fixed", top: 0, right: 0, width: { xs: "100%", sm: 450 }, borderRadius: { xs: 0, sm: "40px 0 0 0" }, backgroundColor: "#fff", m: 0, height: "100vh", maxHeight: "100vh" } }}>
-            <Box sx={{ display: "flex", flexDirection: "column", p: 3, gap: 3 }}>
+            <Box sx={{ display: "flex", flexDirection: "column", p: 3, gap: 3, position: "relative" }}>
+                {isMobile && (
+                    <IconButton
+                        onClick={handleClose}
+                        sx={{
+                            position: "absolute",
+                            top: 8,
+                            right: 8,
+                            color: "#3E3027",
+                            zIndex: 1
+                        }}
+                    >
+                        <CloseIcon />
+                    </IconButton>
+                )}
 
                 {successModalOpen ? (
                     <RegistrationSuccessful onLoginClick={() => { setSuccessModalOpen(false); setTab(0); }} />) : (
